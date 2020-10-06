@@ -25,7 +25,6 @@ import threading
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
 
-
 class MirrorListener(listeners.MirrorListeners):
     def __init__(self, bot, update, isTar=False,tag=None, extract=False):
         super().__init__(bot, update)
@@ -211,6 +210,7 @@ def _mirror(bot, update, isTar=False, extract=False):
         link = direct_link_generator(link)
     except DirectDownloadLinkException as e:
         LOGGER.info(f'{link}: {e}')
+
     listener = MirrorListener(bot, update, isTar, tag, extract)
     ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/',listener)
     sendStatusMessage(update, bot)
