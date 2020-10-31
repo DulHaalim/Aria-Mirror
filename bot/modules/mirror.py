@@ -135,7 +135,8 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str):
         with download_dict_lock:
-            msg = f'📄 <a href="{link}">{download_dict[self.uid].name()}</a> (<i>{download_dict[self.uid].size()}</i>)'
+            msg = f'📄 <a href="{link}">{download_dict[self.uid].name()}</a>'
+            msg += f'\nSize: <i>{download_dict[self.uid].size()}</i>'
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
